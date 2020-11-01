@@ -12,13 +12,13 @@ using namespace std;
 void menuMain();
 void menuSortingList(vector<FireInfo>&, FireInfo&);
 
-
+// This method prints out the main menu.
 int main() {
-	//searchCounty();
+	// This calls out the function of the main menu
 	menuMain();
-
 }
 
+// This method prints out the sub menu.
 void menuMain() {
 	int option;
 	ifstream file;
@@ -60,6 +60,7 @@ void menuMain() {
 	} while (option != 3);
 }
 
+// This prints out the list of sorting list functions.
 void menuSortingList(vector<FireInfo>& fires, FireInfo& firesInfo) {
 	int option;
 
@@ -78,7 +79,7 @@ void menuSortingList(vector<FireInfo>& fires, FireInfo& firesInfo) {
 		cout << "\nSelect an option (1, 2, 3, 4, 5, 6, 7, or 8): ";
 		cin >> option;
 
-		switch (option) {
+		switch (option) { // These list of cases call out the firesInfo's function from constructor.
 		case 1:
 			cout << "Calling printVector()" << endl;
 			firesInfo.printVector(fires);
@@ -111,19 +112,8 @@ void menuSortingList(vector<FireInfo>& fires, FireInfo& firesInfo) {
 		default:
 			cout << "\nWRONG OPTION!\n" << endl;
 		}
-	} while (option != 8);
+	} while (option != 8); // Type 8 on console to go to the main menu.
 }
-
-/*
-
-void sortByFatalities(vector<FireInfo>&);
-void sortByInjuries(vector<FireInfo>&);
-void sortByDamaged(fires);
-void sortByDestroyed(fires);
-void printVector(fires);*/
-
-// This method searches certain county and display the county's descriptions.
-
 
 
  
