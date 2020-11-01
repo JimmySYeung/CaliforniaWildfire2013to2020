@@ -1,5 +1,5 @@
 #include "FireInfo.h"
-
+// This is a default constructor
 FireInfo::FireInfo() {
     acresBurned = 0;
     year = 0;
@@ -11,6 +11,7 @@ FireInfo::FireInfo() {
     name = "None";
 }
 
+// This is a reference of the constructor.
 FireInfo::FireInfo(int acresBurned, int year, string county,
     int fatalities, int injuries, int structDamaged,
     int structDestroyed, string name) {
@@ -24,6 +25,7 @@ FireInfo::FireInfo(int acresBurned, int year, string county,
     this->name = name;
 }
 
+// These are the list of get method and set method from the private members.
 int FireInfo::getAcresBurned() const
 {
     return acresBurned;
@@ -58,6 +60,7 @@ int FireInfo::getFatalities() const
 {
     return fatalities;
 }
+
 
 void FireInfo::setFatalities(int fatalities)
 {
@@ -104,6 +107,8 @@ void FireInfo::setName(string name)
     this->name = name;
 }
 
+// These are the list of sort method
+// This method orders fatalities in ascendent
 void FireInfo::sortByFatalities(vector<FireInfo>& fires)
 {
 
@@ -126,6 +131,7 @@ void FireInfo::sortByFatalities(vector<FireInfo>& fires)
 	printVector(tempFires);
 }
 
+// This method orders injuries in ascendent
 void FireInfo::sortByInjuries(vector<FireInfo>& fires)
 {
 
@@ -148,6 +154,7 @@ void FireInfo::sortByInjuries(vector<FireInfo>& fires)
 	printVector(tempFires);
 }
 
+// This method orders damage in ascendent
 void FireInfo::sortByDamaged(vector<FireInfo>& fires)
 {
 
@@ -170,6 +177,7 @@ void FireInfo::sortByDamaged(vector<FireInfo>& fires)
 	printVector(tempFires);
 }
 
+// This method orders destroy in ascendent
 void FireInfo::sortByDestroyed(vector<FireInfo>& fires)
 {
 
@@ -192,6 +200,7 @@ void FireInfo::sortByDestroyed(vector<FireInfo>& fires)
 	printVector(tempFires);
 }
 
+// This prints out a column and row of data
 void FireInfo::printVector(const vector<FireInfo>& tempFires)
 {
 	cout << "____________________________________________";
@@ -225,6 +234,7 @@ void FireInfo::printVector(const vector<FireInfo>& tempFires)
 	cout << "__________________________________________________" << endl;
 }
 
+// This creates a vec to hold fire information.
 void FireInfo::createVec(ifstream& file, vector<FireInfo>& fires)
 {
 
@@ -260,6 +270,7 @@ void FireInfo::createVec(ifstream& file, vector<FireInfo>& fires)
 			}
 		}
 
+		// These reads the entire line of each row and column
 		getline(file, fatalities, ',');
 		fa = strToInt(fatalities);
 		getline(file, injuries, ',');
@@ -284,6 +295,7 @@ void FireInfo::createVec(ifstream& file, vector<FireInfo>& fires)
 	}
 }
 
+// This method converts from string to integer.
 int FireInfo::strToInt(string s)
 {
 	//Turns the given string into an int
@@ -295,6 +307,7 @@ int FireInfo::strToInt(string s)
 	return x;
 }
 
+// This searches a county name to display a list of them. 
 void FireInfo::searchCounty(ifstream& files, const vector<FireInfo> fires)
 {
 	string name;
@@ -363,6 +376,7 @@ void FireInfo::searchCounty(ifstream& files, const vector<FireInfo> fires)
 	cout << endl;
 }
 
+// This method shows all the county in California. 
 void FireInfo::listOfCounty()
 {
 	cout << "Alameda\nAlpine\nAmador\nButte\nCalaveras\nColusa"
