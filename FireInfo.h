@@ -49,7 +49,7 @@ public:
     string getName() const;
     void setName(string name);
 
-    // Search County
+    // Search County function prototype
     void searchCounty(ifstream&, const vector<FireInfo>);
     void listOfCounty();
 
@@ -62,9 +62,6 @@ public:
 
     void createVec(ifstream&, vector<FireInfo>&);
     int strToInt(string);
-
-    
-
 
 };
 
