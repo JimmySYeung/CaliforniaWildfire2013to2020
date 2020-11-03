@@ -58,6 +58,9 @@ public:
     void sortByInjuries(vector<FireInfo>&);
     void sortByDamaged(vector<FireInfo>&);
     void sortByDestroyed(vector<FireInfo>&);
+    void sortByAcresBurned(const vector<FireInfo>&);
+    void sortByYear(const vector<FireInfo>&);
+    void sortByCounty(const vector<FireInfo>&);
     void printVector(const vector<FireInfo>&);
 
     void createVec(ifstream&, vector<FireInfo>&);
