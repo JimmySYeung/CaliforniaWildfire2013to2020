@@ -1,4 +1,5 @@
 #include "FireInfo.h"
+
 // This is a default constructor
 FireInfo::FireInfo() {
     acresBurned = 0;
@@ -107,6 +108,49 @@ void FireInfo::setName(string name)
     this->name = name;
 }
 
+void FireInfo::sortByYear(const vector<FireInfo>& fires)
+{
+	vector<FireInfo> tempFires;
+	tempFires.push_back(fires.at(0));
+	for (unsigned int i = 0; i < fires.size(); i++) {
+		if (fires.at(i).year == 0) {
+			tempFires.push_back(fires.at(i));
+		}
+		else if (fires.at(i).year >= tempFires.at(0).year) {
+			tempFires.insert(tempFires.begin(), fires.at(i));
+		}
+		else {
+			int u = 1;
+			while (fires.at(i).year < tempFires.at(u).year) {
+				u++;
+			}
+			tempFires.insert(tempFires.begin() + u, fires.at(i));
+		}
+	}
+	printVector(tempFires);
+}
+void FireInfo::sortByCounty(const vector<FireInfo>& fires)
+{
+	vector<FireInfo> tempFires;
+	tempFires.push_back(fires.at(0));
+	for (unsigned int i = 0; i < fires.size(); i++) {
+		if (fires.at(i).county.empty()) {
+			tempFires.push_back(fires.at(i));
+		}
+		else if (fires.at(i).county >= tempFires.at(0).county) {
+			tempFires.insert(tempFires.begin(), fires.at(i));
+		}
+		else {
+			int u = 1;
+			while (fires.at(i).county < tempFires.at(u).county) {
+				u++;
+			}
+			tempFires.insert(tempFires.begin() + u, fires.at(i));
+		}
+	}
+	printVector(tempFires);
+}
+
 // These are the list of sort method
 // This method orders fatalities in ascendent
 void FireInfo::sortByFatalities(vector<FireInfo>& fires)
@@ -200,6 +244,34 @@ void FireInfo::sortByDestroyed(vector<FireInfo>& fires)
 	printVector(tempFires);
 }
 
+void FireInfo::sortByAcresBurned(const vector<FireInfo>& fires)
+{
+	vector<FireInfo> tempFires;
+	int u = 1;
+	tempFires.push_back(fires.at(0));
+	for (unsigned int i = 0; i < fires.size(); i++) {
+		if (fires.at(i).acresBurned == 0) {
+			tempFires.push_back(fires.at(i));
+			u = i - 1;
+		}
+		else if (fires.at(i).acresBurned >= tempFires.at(0).acresBurned) {
+			tempFires.insert(tempFires.begin(), fires.at(i));
+		}
+		else {
+			//u = 1;
+			while (fires.at(i).acresBurned < tempFires.at(u).acresBurned) {
+				//u++;
+
+				u = u - 1;
+			}
+			tempFires.insert(tempFires.begin() + u, fires.at(i));
+		}
+	}
+	printVector(tempFires);
+}
+
+
+
 // This prints out a column and row of data
 void FireInfo::printVector(const vector<FireInfo>& tempFires)
 {
@@ -222,7 +294,14 @@ void FireInfo::printVector(const vector<FireInfo>& tempFires)
 	for (unsigned int i = 0; i < tempFires.size(); i++) {
 		cout << tempFires.at(i).acresBurned << "\t\t|";
 		cout << tempFires.at(i).year << "\t|\t";
-		cout << tempFires.at(i).county << "|\t";
+		// This makes county to have 16 elements. 
+		cout << tempFires.at(i).county;
+		for (int j = 0; j < 16; j++) {
+			if (j > tempFires.at(i).county.size()) {
+				cout << " ";
+			}
+		}
+		cout << "|\t";
 		cout << tempFires.at(i).fatalities << "\t|\t";
 		cout << tempFires.at(i).injuries << "\t|\t";
 		cout << tempFires.at(i).structDamaged << "\t|\t";
@@ -262,14 +341,6 @@ void FireInfo::createVec(ifstream& file, vector<FireInfo>& fires)
 		getline(file, year, ',');
 		yr = strToInt(year);
 		getline(file, county, ',');
-
-		// This makes county to have 16 elements. 
-		for (i = 0; i < 16; i++) {
-			if (i > county.size()) {
-				county.insert(county.end(), ' ');
-			}
-		}
-
 		// These reads the entire line of each row and column
 		getline(file, fatalities, ',');
 		fa = strToInt(fatalities);
@@ -313,7 +384,7 @@ void FireInfo::searchCounty(ifstream& files, const vector<FireInfo> fires)
 	string name;
 	string option;
 	int i = 0;
-	int count = 0;
+	int stop = 0;
 
 	// I need cin.ignore() to make getline(cin, name) to work.
 	// This checks for unncessary typing.
@@ -334,45 +405,61 @@ void FireInfo::searchCounty(ifstream& files, const vector<FireInfo> fires)
 
 	getline(cin, name);
 
-	// This makes name to have 16 characters.
-	for (i = 0; i < 16; i++) {
-		if (i > name.size()) {
-			name.insert(name.end(), ' ');
-		}
-	}
 
 
-	cout << "acresBurned" << "\t";
-	cout << "year" << "\t";
-	cout << "county             ";
-	cout << "fatalities" << "\t";
-	cout << "     injuries" << "\t";
-	cout << "buildings damaged   ";
-	cout << "buildings destroyed\t";
+	cout << "____________________________________________";
+	cout << "____________________________________________";
+	cout << "__________________________________________________" << endl;
+	cout << endl;
+	cout << "acresBurned" << "\t|";
+	cout << "year" << "\t|\t";
+	cout << "county  \t|";
+	cout << "fatalities" << "\t|";
+	cout << "     injuries " << "\t|";
+	cout << "  buildings   \t|";
+	cout << "  buildings \t|  ";
 	cout << " type of fire" << endl;
+	cout << "\t\t|\t|\t\t\t|\t\t|\t\t|   damaged\t|  destroyed\t|\t" << endl;
+	cout << "____________________________________________";
+	cout << "____________________________________________";
+	cout << "__________________________________________________" << endl;
+	for (unsigned int i = 0; i < fires.size(); i++) {
 
-	for (i = 0; i < fires.size(); i++) {
 
-		if (fires.at(i).county == name) {
 
-			cout << fires.at(i).acresBurned << "\t\t";
-			cout << fires.at(i).year << "\t";
-			cout << fires.at(i).county << "\t\t";
-			cout << fires.at(i).fatalities << "\t\t";
-			cout << fires.at(i).injuries << "\t\t";
-			cout << fires.at(i).structDamaged << "\t\t";
-			cout << fires.at(i).structDestroyed << "\t\t    ";
+		if (name == fires.at(i).county) {
+			stop = 1;
+			cout << fires.at(i).acresBurned << "\t\t|";
+			cout << fires.at(i).year << "\t|\t";
+			// This makes county to have 16 elements. 
+			cout << fires.at(i).county;
+			for (int j = 0; j < 16; j++) {
+				if (j > fires.at(i).county.size()) {
+					cout << " ";
+				}
+			}
+			cout << "|\t";
+			cout << fires.at(i).fatalities << "\t|\t";
+			cout << fires.at(i).injuries << "\t|\t";
+			cout << fires.at(i).structDamaged << "\t|\t";
+			cout << fires.at(i).structDestroyed << "\t|\t";
 			cout << fires.at(i).name << endl;
-			count++;
 		}
 
-		if (count == 0 && i == fires.size() - 1) {
+		if (stop == 0 && i == fires.size() - 1) {
 			cout << "\nYou typed the incorrect county name." << endl;
 			cout << "Go back using the menu to search your county." << endl;
 		}
 
 	}
-	cout << "The list had shown " << count << endl;
+	cout << "____________________________________________";
+	cout << "____________________________________________";
+	cout << "__________________________________________________" << endl;
+
+
+
+
+	cout << "The list had shown " << stop << endl;
 	cout << endl;
 }
 
