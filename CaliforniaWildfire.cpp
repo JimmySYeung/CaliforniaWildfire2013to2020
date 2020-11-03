@@ -74,7 +74,8 @@ void menuSortingList(vector<FireInfo>& fires, FireInfo& firesInfo) {
 			<< "\n* 5. # of people injuried                       *"
 			<< "\n* 6. # of structures damaged                    *"
 			<< "\n* 7. # of structures destroyed                  *"
-			<< "\n* 8. Quit                                       *"
+			<< "\n* 8. County in alphabetical order               *"
+			<< "\n* 9. Quit                                      *"
 			<< "\n*************************************************";
 		cout << "\nSelect an option (1, 2, 3, 4, 5, 6, 7, or 8): ";
 		cin >> option;
@@ -86,9 +87,11 @@ void menuSortingList(vector<FireInfo>& fires, FireInfo& firesInfo) {
 			break;
 		case 2:
 			cout << "Calling archive year " << endl;
+			firesInfo.sortByYear(fires);
 			break;
 		case 3:
 			cout << "Calling # of acres burned" << endl;
+			firesInfo.sortByAcresBurned(fires);
 			break;
 		case 4:
 			cout << "Calling # of people death(fatalities) " << endl;
@@ -107,12 +110,16 @@ void menuSortingList(vector<FireInfo>& fires, FireInfo& firesInfo) {
 			firesInfo.sortByDestroyed(fires);
 			break;
 		case 8:
+			cout << "Calling county in alphabetical order" << endl;
+			firesInfo.sortByCounty(fires);
+			break;
+		case 9:
 			cout << "Go back to main menu" << endl;
 			break;
 		default:
 			cout << "\nWRONG OPTION!\n" << endl;
 		}
-	} while (option != 8); // Type 8 on console to go to the main menu.
+	} while (option != 9); // Type 8 on console to go to the main menu.
 }
 
 
