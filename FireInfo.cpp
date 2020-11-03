@@ -129,25 +129,29 @@ void FireInfo::sortByYear(const vector<FireInfo>& fires)
 	}
 	printVector(tempFires);
 }
+
+// This is sorted by county in alphabetica order from A to Z.
 void FireInfo::sortByCounty(const vector<FireInfo>& fires)
 {
 	vector<FireInfo> tempFires;
-	tempFires.push_back(fires.at(0));
-	for (unsigned int i = 0; i < fires.size(); i++) {
-		if (fires.at(i).county.empty()) {
-			tempFires.push_back(fires.at(i));
-		}
-		else if (fires.at(i).county >= tempFires.at(0).county) {
-			tempFires.insert(tempFires.begin(), fires.at(i));
-		}
-		else {
-			int u = 1;
-			while (fires.at(i).county < tempFires.at(u).county) {
-				u++;
+	int j = 0;
+	int k;
+	int key;
+	FireInfo temp;
+	tempFires = fires;
+	
+		for (unsigned int i = 0; i < fires.size(); i++) {
+			temp = tempFires.at(i);
+			j = i - 1;
+			while (j >= 0 && tempFires[j].county.substr(0,5) > temp.county.substr(0, 5)) {
+				tempFires[j + 1] = tempFires[j];
+				j--;
 			}
-			tempFires.insert(tempFires.begin() + u, fires.at(i));
+			tempFires[j + 1] = temp;
+
 		}
-	}
+
+
 	printVector(tempFires);
 }
 
