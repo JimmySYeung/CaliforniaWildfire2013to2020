@@ -247,22 +247,18 @@ void FireInfo::sortByDestroyed(vector<FireInfo>& fires)
 void FireInfo::sortByAcresBurned(const vector<FireInfo>& fires)
 {
 	vector<FireInfo> tempFires;
-	int u = 1;
 	tempFires.push_back(fires.at(0));
 	for (unsigned int i = 0; i < fires.size(); i++) {
 		if (fires.at(i).acresBurned == 0) {
 			tempFires.push_back(fires.at(i));
-			u = i - 1;
 		}
 		else if (fires.at(i).acresBurned >= tempFires.at(0).acresBurned) {
 			tempFires.insert(tempFires.begin(), fires.at(i));
 		}
 		else {
-			//u = 1;
+			int u = 1;
 			while (fires.at(i).acresBurned < tempFires.at(u).acresBurned) {
-				//u++;
-
-				u = u - 1;
+				u++;
 			}
 			tempFires.insert(tempFires.begin() + u, fires.at(i));
 		}
