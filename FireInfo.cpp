@@ -157,7 +157,7 @@ void FireInfo::sortByCounty(const vector<FireInfo>& fires)
 
 // These are the list of sort method
 // This method orders fatalities in ascendent
-void FireInfo::sortByFatalities(vector<FireInfo>& fires)
+void FireInfo::sortByFatalities(const vector<FireInfo>& fires)
 {
 
 	vector<FireInfo> tempFires;
@@ -180,7 +180,7 @@ void FireInfo::sortByFatalities(vector<FireInfo>& fires)
 }
 
 // This method orders injuries in ascendent
-void FireInfo::sortByInjuries(vector<FireInfo>& fires)
+void FireInfo::sortByInjuries(const vector<FireInfo>& fires)
 {
 
 	vector<FireInfo> tempFires;
@@ -203,7 +203,7 @@ void FireInfo::sortByInjuries(vector<FireInfo>& fires)
 }
 
 // This method orders damage in ascendent
-void FireInfo::sortByDamaged(vector<FireInfo>& fires)
+void FireInfo::sortByDamaged(const vector<FireInfo>& fires)
 {
 
 	vector<FireInfo> tempFires;
@@ -226,7 +226,7 @@ void FireInfo::sortByDamaged(vector<FireInfo>& fires)
 }
 
 // This method orders destroy in ascendent
-void FireInfo::sortByDestroyed(vector<FireInfo>& fires)
+void FireInfo::sortByDestroyed(const vector<FireInfo>& fires)
 {
 
 	vector<FireInfo> tempFires;
