@@ -54,10 +54,10 @@ public:
     void listOfCounty();
 
     // Sorting function prototypes
-    void sortByFatalities(vector<FireInfo>&);
-    void sortByInjuries(vector<FireInfo>&);
-    void sortByDamaged(vector<FireInfo>&);
-    void sortByDestroyed(vector<FireInfo>&);
+    void sortByFatalities(const vector<FireInfo>&);
+    void sortByInjuries(const vector<FireInfo>&);
+    void sortByDamaged(const vector<FireInfo>&);
+    void sortByDestroyed(const vector<FireInfo>&);
     void sortByAcresBurned(const vector<FireInfo>&);
     void sortByYear(const vector<FireInfo>&);
     void sortByCounty(const vector<FireInfo>&);
